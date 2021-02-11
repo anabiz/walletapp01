@@ -16,6 +16,7 @@ const user = async (req: Request, res: Response) => {
         res.status(400).json({ message: "incurrent input" });
         return;
     } catch (error) {
+        console.log(error)
         res.status(500).json({ error: error.message });
         return;
     }
