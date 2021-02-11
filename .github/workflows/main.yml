@@ -1,0 +1,28 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn tsc
+      - run: yarn test
+        env:
+          SESSION_SECRET: secret
+          ACCESS_TOKEN_SECRET: 858aa4ced22cd3f7887ab45283513506591307a33611e449acb8b8f1e8a367ffe88da61ead451910813a5d3ae019474b7170121eb46673a8eebe45704e62f626
+          REFRESH_TOKEN_SECRET: 0ed7adaf8d50311f84a07da65e2443c6ee9ed9e0bd30a1c36b9fcfde6b962005d143f44dad7087b40f7b2a5219bb5b50984a28cca4d11e219f814f9656220c30
+          RESET_PASSWORD_KEY: secret0ed7adaf8d50
+          DATABASE_URL: postgres://weehppkf:cEXRrWDCmGHacyu4U1S8ZB-zFCMTZIC6@ziggy.db.elephantsql.com:5432/weehppkf
+          API_ACCESS_KEY: 85e2363548acec07d1db8e14b0c4cb78
